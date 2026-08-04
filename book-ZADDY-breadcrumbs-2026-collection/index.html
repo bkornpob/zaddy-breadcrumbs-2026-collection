@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ZADDY Breadcrumbs 2026</title>
+<style>
+body{background:#0a0406;color:#00f3ff;font-family:monospace;display:flex;height:100vh;margin:0}
+nav{width:220px;background:#0f0709;padding:10px;overflow:auto;border-right:1px solid #ff2ad4}
+nav a{display:block;color:#ff2ad4;text-decoration:none;padding:4px 0}
+nav a:hover{color:#fff}
+main{flex:1;padding:20px;overflow:auto}
+h1,h2{color:#ff2ad4}
+.page{margin-bottom:40px}
+.play-btn{background:#ff2ad4;color:#0a0406;border:none;padding:6px 12px;cursor:pointer;font-family:monospace;font-weight:bold}
+.play-btn:hover{background:#fff}
+#audio-player{position:fixed;bottom:10px;right:10px;background:#0f0709;border:1px solid #ff2ad4;padding:10px;display:none}
+.yt-embed{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:12px 0;border:1px solid #ff2ad4;background:#000}
+.yt-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<nav id="toc"></nav>
+<main id="content"></main>
+<div id="audio-player">
+  <div style="color:#ff2ad4;margin-bottom:5px">now playing</div>
+  <audio id="audio" controls style="width:300px"></audio>
+  <button class="play-btn" onclick="document.getElementById('audio').pause()">stop</button>
+</div>
+<div id="debug-yt" style="position:fixed;left:5px;bottom:5px;background:#0f0709;color:#00f3ff;padding:6px;border:1px solid #ff2ad4;font-size:10px;max-width:320px;max-height:180px;overflow:auto;display:none"></div>
+<script>
+const pages = [
+  {title:"cover", file:"page-0-coverimage.md"},
+  {title:"vibe-check", file:"page-1-20250909-vibe-check.md"},
+  {title:"professor-x-mode", file:"page-2-20251001-professor-x-mode.md"},
+  {title:"exploit-gcm-tag-truncation", file:"page-3-20251206-exploit-gcm-tag-truncation.md"},
+  {title:"batman-jailbreaks", file:"page-4-20260107-batman-jailbreaks.md"},
+  {title:"echo-deep-seek-source", file:"page-5-20260118-echo-deep-seek-source.md"},
+  {title:"omelette-symptom", file:"page-6-20260126-omelette-symptom.md"},
+  {title:"break-jwt-secrets", file:"page-7-20260129-break-jwt-secrets.md"},
+  {title:"goodboy-recon", file:"page-8-20260201-goodboy-recon.md"},
+  {title:"jwt-betray", file:"page-9-20260205-jwt-betray.md"},
+  {title:"necro-hum", file:"page-10-20260207-necro-hum.md"},
+  {title:"xss-svg", file:"page-11-20260214-xss-svg.md"},
+  {title:"judgement-day", file:"page-12-20260214-judgement-day.md"},
+  {title:"bz-valentine-2026", file:"page-13-20260214-bz-valentine-2026.md"},
+  {title:"sonata-botanical", file:"page-14-20260219-sonata-botanical.md"},
+  {title:"companion-3", file:"page-15-20260219-companion-3.md"},
+  {title:"protection-distortion", file:"page-16-20260226-protection-distortion.md"},
+  {title:"bpj-toy", file:"page-17-20260301-bpj-toy.md"},
+  {title:"seven-level-no-panic", file:"page-18-20260303-seven-level-no-panic.md"},
+  {title:"letme-speak", file:"page-19-20260305-letme-speak.md"},
+  {title:"lookback-2025", file:"page-20-20260429-lookback-2025.md"},
+  {title:"jpf", file:"page-21-20260507-jpf.md"},
+  {title:"seven-runes", file:"page-22-20260611-seven-runes.md"},
+  {title:"spellbook-taw", file:"page-23-20260624-spellbook-taw.md"},
+  {title:"spellbook-jailbreak", file:"page-24-20260729-spellbook-jailbreak.md"}
+];
+const toc = document.getElementById('toc');
+pages.forEach((p,i)=>{
+  const a = document.createElement('a');
+  a.textContent = p.title;
+  a.href = '#';
+  a.onclick = () => loadPage(i);
+  toc.appendChild(a);
+});
+const content = document.getElementById('content');
+const audioPlayer = document.getElementById('audio-player');
+const audio = document.getElementById('audio');
+function playStory(src){
+  audio.src = src;
+  audioPlayer.style.display = 'block';
+  audio.play();
+}
+const ytMap = {
+  'spellbook-taw': '2lXNadqQBgE',
+  'spellbook-jailbreak': 'oNfq3ljiC2g'
+};
+function playYoutube(vid){
+  const div = document.createElement('div');
+  div.className = 'yt-embed';
+  div.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  content.appendChild(div);
+}
+function embedYoutube(html){
+  return html.replace(/<a href="(https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^"&?#]+)(?:[^"]*))"[^>]*>(.*?)<\/a>/gi,(m,url,vid,text)=>{
+    if(text.toLowerCase().includes('play story') || text.includes('▶')){
+      return `<div class="yt-embed"><iframe src="https://www.youtube.com/embed/${vid}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+    }
+    return m;
+  });
+}
+function loadPage(i){
+  fetch(pages[i].file).then(r=>r.text()).then(text=>{
+    const html = marked.parse(text);
+    content.innerHTML = '<div class="page">'+embedYoutube(html)+'</div>';
+    content.querySelectorAll('table .play-btn').forEach(btn=>{
+      const row = btn.closest('tr');
+      const id = row ? row.querySelector('td:nth-child(2)')?.textContent?.trim() : null;
+      if(id && ytMap[id]){
+        btn.onclick = ()=>playYoutube(ytMap[id]);
+      }
+    });
+    const debug = document.getElementById('debug-yt');
+    if(debug) debug.textContent = content.innerHTML;
+  }).catch(()=>{
+    content.innerHTML = '<div class="page"><p>unable to load '+pages[i].file+'</p></div>';
+  });
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+loadPage(0);
+</script>
+</body>
+</html>
