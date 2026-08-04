@@ -2,6 +2,8 @@
 ZINE / SPELLBOOK — static web edition
 LICENSE: Creative Commons
 
+**Citation:** Bhirombhakdi, K. (2026). ZADDY breadcrumbs 2026 collection. Zenodo. https://doi.org/10.5281/zenodo.21791515
+
 ## what it is
 A cyberpunk spellbook zine built as a single-page web reader. It collects 25 pages of breadcrumbs, experiments, and notes into one portable HTML reader with inline audio and YouTube embeds.
 

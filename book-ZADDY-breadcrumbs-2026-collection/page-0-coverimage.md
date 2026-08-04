@@ -2,7 +2,9 @@
 
 <img src="../assets/breadcrumbs-coverimage.png" alt="breadcrumbs cover" style="width:50%; max-width:420px; height:auto; display:block; margin:0 auto;">
 
-> \*"threads over walls. breadcrumbs over forgetting."\*
+> *"threads over walls. breadcrumbs over forgetting."*
+
+**Citation:** Bhirombhakdi, K. (2026). ZADDY breadcrumbs 2026 collection. Zenodo. https://doi.org/10.5281/zenodo.21791515
 
 style: neon magenta bloom cyberpunk retro — magenta `#ff2ad4` and cyan `#00f3ff` on deep void `#0a0406`, retro grid, neon bloom, corner HUD marks.
 
