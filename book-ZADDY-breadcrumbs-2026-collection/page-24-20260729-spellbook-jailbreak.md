@@ -11,3 +11,7 @@ vibe: agent vulnerabilities
 refs: [multiverlib-collectives](https://bkornpob.github.io/spellbook-of-jailbreak-and-agent-vulnerabilities/) · [zenodo](https://zenodo.org/records/21665118) · [github](https://bkornpob.github.io/spellbook-of-jailbreak-and-agent-vulnerabilities/)
 
 [play Youtube](https://youtu.be/oNfq3ljiC2g?si=97lh6f_ENkJz0qn5)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oNfq3ljiC2g?si=udPS_TLEVTGmi7MZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yWlcNBe8aBE?si=iktdw6__o9CjVE-N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

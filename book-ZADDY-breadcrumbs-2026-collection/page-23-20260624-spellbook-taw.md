@@ -10,4 +10,6 @@ vibe: task avoidance mapped
 
 refs: [multiverlib-collectives](https://bkornpob.github.io/spellbook-of-task-avoidance-wards/) · [zenodo](https://zenodo.org/records/20821697) · [github](https://bkornpob.github.io/spellbook-of-task-avoidance-wards/)
 
-[play Youtube](https://youtu.be/2lXNadqQBgE?si=tZ_chZtrlrsHruN8)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2lXNadqQBgE?si=UxPHCHWLficoGAyq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/anQeHuurDZk?si=AbneY_29Xswroba_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
