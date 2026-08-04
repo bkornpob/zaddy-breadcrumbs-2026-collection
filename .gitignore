@@ -1,0 +1,13 @@
+# System & IDE
+.DS_Store
+.vscode/
+.idea/
+__pycache__/
+
+# Build & Local
+products/
+dist/
+.env
+*.log
+node_modules/
+index.html:Zone.Identifier

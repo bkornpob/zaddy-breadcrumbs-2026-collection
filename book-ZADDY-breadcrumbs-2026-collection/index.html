@@ -4,46 +4,53 @@
 <meta charset="UTF-8">
 <title>ZADDY Breadcrumbs 2026</title>
 <style>
-body{background:#0a0406;color:#00f3ff;font-family:monospace;display:flex;height:100vh;margin:0}
-nav{width:220px;background:#0f0709;padding:10px;overflow:auto;border-right:1px solid #ff2ad4}
-nav a{display:block;color:#ff2ad4;text-decoration:none;padding:4px 0}
-nav a:hover{color:#fff}
-main{flex:1;padding:20px;overflow:auto}
-.page{margin-bottom:40px}
-.cover img{display:block;margin:0 auto;max-width:100%;height:auto;border:1px solid #ff2ad4}
-.glitch-text {
-  position: relative;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: white;
-  display: inline-block;
-}
-.glitch-text::before, .glitch-text::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-}
-.glitch-text::before { color: cyan; clip: rect(0, 100px, 0, 0); transform: translate(2px, -2px); }
-.glitch-text::after { color: magenta; clip: rect(0, 100px, 0, 0); transform: translate(-2px, 2px); }
-.section{margin:18px 0;padding:14px;border:1px solid #1b0812;background:#12080c;border-radius:6px}
-.section h1,.section h2{color:#ff2ad4;margin-top:0}
-.play-btn{background:#ff2ad4;color:#0a0406;border:none;padding:6px 12px;cursor:pointer;font-family:monospace;font-weight:bold;margin:4px 0}
-.play-btn:hover{background:#fff}
-#audio-player{position:fixed;bottom:10px;right:10px;background:#0f0709;border:1px solid #ff2ad4;padding:10px;display:none}
-.yt-embed{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:12px 0;border:1px solid #ff2ad4;background:#000}
-.yt-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+  :root {
+    --bg: #0a0406; --panel: #12080c; --text: #ffd2dc;
+    --red: #ff2ad4; --red-dim: #971a7a; --cyan: #00f3ff;
+  }
+  body { background: var(--bg); color: var(--text); font-family: monospace; margin: 0; }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; border-bottom: 1px solid var(--red-dim);
+  }
+  .theme-switcher { display: flex; gap: 10px; }
+  .theme-switcher button {
+    background: transparent; border: 1px solid var(--red-dim); color: var(--red);
+    padding: 4px 8px; cursor: pointer; font-family: monospace;
+  }
+  .theme-switcher button:hover { background: var(--red); color: var(--bg); }
+  nav { width: 220px; padding: 10px; float: left; border-right: 1px solid var(--red-dim); height: calc(100vh - 50px); overflow: auto; }
+  nav a { display: block; color: var(--red); text-decoration: none; padding: 4px 0; }
+  nav a:hover { color: #fff; }
+  main { margin-left: 240px; padding: 20px; }
+  
+  /* THEMES */
+  .vibe-zaddy { --bg: #1a0f05; --panel: #2a1a0a; --text: #ffb347; --red: #ff4d1a; --cyan: #ff8c00; }
+  .vibe-dab { --bg: #020d08; --panel: #071c10; --text: #9df5b7; --red: #ff3c78; --cyan: #39ff91; }
+  .vibe-gdk { --bg: #050a14; --panel: #0a1428; --text: #a0c4ff; --red: #ff2b6a; --cyan: #4a90d9; }
 </style>
 </head>
 <body>
+<header>
+  <div>
+    <a href="https://bkornpob.github.io/" style="color:var(--red);text-decoration:none;margin-right:20px;">multiverselib-collectives</a>
+    ZADDY Breadcrumbs 2026
+  </div>
+  <div class="theme-switcher">
+    <button onclick="setTheme('')">default</button>
+    <button onclick="setTheme('vibe-zaddy')">ZADDY</button>
+    <button onclick="setTheme('vibe-dab')">DAB</button>
+    <button onclick="setTheme('vibe-gdk')">GDK</button>
+  </div>
+</header>
 <nav id="toc"></nav>
 <main id="content"></main>
-<div id="audio-player">
-  <div style="color:#ff2ad4;margin-bottom:5px">now playing</div>
-  <audio id="audio" controls style="width:300px"></audio>
-  <button class="play-btn" onclick="document.getElementById('audio').pause()">stop</button>
-</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
+function setTheme(t) { document.body.className = t; localStorage.setItem('theme', t); }
+document.body.className = localStorage.getItem('theme') || '';
+
 const pages = [
   {title:"cover", file:"page-0-coverimage.md"},
   {title:"vibe-check", file:"page-1-20250909-vibe-check.md"},
@@ -76,70 +83,14 @@ pages.forEach((p,i)=>{
   const a = document.createElement('a');
   a.textContent = p.title;
   a.href = '#';
-  a.onclick = () => loadPage(i);
+  a.onclick = (e) => { e.preventDefault(); loadPage(i); };
   toc.appendChild(a);
 });
-const content = document.getElementById('content');
-const audioPlayer = document.getElementById('audio-player');
-const audio = document.getElementById('audio');
-function playStory(src){
-  audio.src = src;
-  audioPlayer.style.display = 'block';
-  audio.play();
-}
-const ytMap = {
-  'spellbook-taw': '2lXNadqQBgE',
-  'spellbook-jailbreak': 'oNfq3ljiC2g'
-};
-function playYoutube(vid){
-  const div = document.createElement('div');
-  div.className = 'yt-embed';
-  div.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-  content.appendChild(div);
-}
-function embedYoutube(html){
-  return html.replace(/<a href="(https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^"&?#]+)(?:[^"]*))"[^>]*>(.*?)<\/a>/gi,(m,url,vid,text)=>{
-    if(text.toLowerCase().includes('play story') || text.includes('▶')){
-      return `<div class="yt-embed"><iframe src="https://www.youtube.com/embed/${vid}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
-    }
-    return m;
-  });
-}
-function styleSections(html, pageIndex){
-  if(pageIndex===0){
-    return '<div class="cover">' + html + '</div>';
-  }
-  return html
-    .replace(/<h1>/g,'<div class="section"><h1>')
-    .replace(/<h2>/g,'<div class="section"><h2>')
-    .replace(/<\/h1>/g,'</h1></div>')
-    .replace(/<\/h2>/g,'</h2></div>')
-    .replace(/<ul>/g,'<div class="section"><ul>')
-    .replace(/<\/ul>/g,'</ul></div>')
-    .replace(/<table>/g,'<div class="section"><table>')
-    .replace(/<\/table>/g,'</table></div>');
-}
 function loadPage(i){
   fetch(pages[i].file).then(r=>r.text()).then(text=>{
-    const html = marked.parse(text);
-    const embedded = embedYoutube(html);
-    content.innerHTML = '<div class="page">'+styleSections(embedded,i)+'</div>';
-    content.querySelectorAll('table .play-btn').forEach(btn=>{
-      const row = btn.closest('tr');
-      const idCell = row ? row.querySelector('td:nth-child(2)') : null;
-      const id = idCell ? idCell.textContent.trim() : null;
-      console.log('Wiring table button:', id, ytMap[id]);
-      if(id && ytMap[id]){
-        btn.onclick = ()=>playYoutube(ytMap[id]);
-      }
-    });
-  }).catch(()=>{
-    content.innerHTML = '<div class="page"><p>unable to load '+pages[i].file+'</p></div>';
+    document.getElementById('content').innerHTML = marked.parse(text);
   });
 }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
 loadPage(0);
 </script>
 </body>
