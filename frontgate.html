@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pick up ZADDY Breadcrumbs</title>
+    <style>
+        body { background: #0a0406; color: #00f3ff; font-family: monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .node { width: 50px; height: 50px; background: #ff2ad4; border-radius: 50%; cursor: pointer; margin: 10px; display: inline-block; }
+        .hidden { display: none; }
+        #breadcrumb { cursor: pointer; font-size: 50px; }
+    </style>
+</head>
+<body>
+    <div id="step1">
+        <h2>1. Align Nodes</h2>
+        <div class="node" onclick="this.classList.add('hidden'); checkStep1()"></div>
+        <div class="node" onclick="this.classList.add('hidden'); checkStep1()"></div>
+        <div class="node" onclick="this.classList.add('hidden'); checkStep1()"></div>
+    </div>
+    <div id="step2" class="hidden">
+        <h2>2. Tune Frequency</h2>
+        <input type="range" min="0" max="100" id="freq" oninput="checkStep2()">
+    </div>
+    <div id="step3" class="hidden">
+        <h2>3. Consume</h2>
+        <div id="breadcrumb" onclick="finish()">🍞</div>
+    </div>
+    <script>
+        let nodes = 0;
+        function checkStep1() { nodes++; if(nodes===3) { document.getElementById('step1').classList.add('hidden'); document.getElementById('step2').classList.remove('hidden'); } }
+        function checkStep2() { if(document.getElementById('freq').value > 80) { document.getElementById('step2').classList.add('hidden'); document.getElementById('step3').classList.remove('hidden'); } }
+        function finish() { window.location.href = 'book-ZADDY-breadcrumbs-2026-collection/index.html'; }
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <defs>
+    <!-- base background -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0406"/>
+      <stop offset="100%" stop-color="#09050e"/>
+    </linearGradient>
+
+    <!-- neon bloom glow filters -->
+    <filter id="glowMagenta" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowCyan" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowThin" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- vertical scanline -->
+    <pattern id="scanlines" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="1" fill="rgba(255,255,255,0.035)"/>
+    </pattern>
+
+    <!-- diagonal glitch band -->
+    <linearGradient id="glitchBand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff2ad4" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#ff2ad4" stop-opacity="0.18"/>
+      <stop offset="55%" stop-color="#00f3ff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- clip for main frame -->
+    <clipPath id="frameClip">
+      <rect x="0" y="0" width="600" height="800"/>
+    </clipPath>
+  </defs>
+
+  <!-- base -->
+  <rect width="600" height="800" fill="url(#bg)"/>
+
+  <!-- grid -->
+  <g opacity=".22" stroke="#2a001e" stroke-width="1">
+    <g id="vertGrid">
+      <line x1="0" y1="0" x2="0" y2="800"/>
+      <line x1="60" y1="0" x2="60" y2="800"/>
+      <line x1="120" y1="0" x2="120" y2="800"/>
+      <line x1="180" y1="0" x2="180" y2="800"/>
+      <line x1="240" y1="0" x2="240" y2="800"/>
+      <line x1="300" y1="0" x2="300" y2="800"/>
+      <line x1="360" y1="0" x2="360" y2="800"/>
+      <line x1="420" y1="0" x2="420" y2="800"/>
+      <line x1="480" y1="0" x2="480" y2="800"/>
+      <line x1="540" y1="0" x2="540" y2="800"/>
+      <line x1="600" y1="0" x2="600" y2="800"/>
+    </g>
+    <g id="horizGrid">
+      <line x1="0" y1="0" x2="600" y2="0"/>
+      <line x1="0" y1="60" x2="600" y2="60"/>
+      <line x1="0" y1="120" x2="600" y2="120"/>
+      <line x1="0" y1="180" x2="600" y2="180"/>
+      <line x1="0" y1="240" x2="600" y2="240"/>
+      <line x1="0" y1="300" x2="600" y2="300"/>
+      <line x1="0" y1="360" x2="600" y2="360"/>
+      <line x1="0" y1="420" x2="600" y2="420"/>
+      <line x1="0" y1="480" x2="600" y2="480"/>
+      <line x1="0" y1="540" x2="600" y2="540"/>
+      <line x1="0" y1="600" x2="600" y2="600"/>
+      <line x1="0" y1="660" x2="600" y2="660"/>
+      <line x1="0" y1="720" x2="600" y2="720"/>
+      <line x1="0" y1="780" x2="600" y2="780"/>
+    </g>
+  </g>
+
+  <!-- scanline overlay -->
+  <rect width="600" height="800" fill="url(#scanlines)" opacity=".6"/>
+
+  <!-- chromatic glitch band -->
+  <rect x="0" y="290" width="600" height="60" fill="url(#glitchBand)" opacity=".9"/>
+
+  <!-- corner HUD brackets -->
+  <g stroke="#ff2ad4" stroke-width="2" fill="none" opacity=".8" filter="url(#glowThin)">
+    <path d="M 28 28 L 80 28 M 28 28 L 28 80"/>
+    <path d="M 572 28 L 520 28 M 572 28 L 572 80"/>
+    <path d="M 28 772 L 80 772 M 28 772 L 28 720"/>
+    <path d="M 572 772 L 520 772 M 572 772 L 572 720"/>
+  </g>
+
+  <!-- center content -->
+  <g text-anchor="middle" font-family="Courier New, monospace">
+    <!-- label -->
+    <text x="300" y="280" fill="#00f3ff" font-size="12" letter-spacing="6" opacity=".85" filter="url(#glowCyan)">
+      SPELLBOOK ENTRY
+    </text>
+
+    <!-- main title -->
+    <text x="300" y="360" fill="#ff2ad4" font-size="54" font-weight="bold" letter-spacing="5" opacity=".96" filter="url(#glowMagenta)">
+      ZADDY
+    </text>
+
+    <!-- chromatic aberration shadow text (cyan up-right) -->
+    <text x="303" y="363" fill="#00f3ff" font-size="54" font-weight="bold" letter-spacing="5" opacity=".35">
+      ZADDY
+    </text>
+
+    <!-- divider -->
+    <line x1="180" y1="395" x2="420" y2="395" stroke="#ff2ad4" stroke-width="1" opacity=".6">
+      <animate attributeName="opacity" values=".6;.2;.6" dur="4s" repeatCount="indefinite"/>
+    </line>
+
+    <!-- subtitle -->
+    <text x="300" y="435" fill="#00f3ff" font-size="16" letter-spacing="3" opacity=".92" filter="url(#glowCyan)">
+      BREADCRUMBS
+    </text>
+    <text x="300" y="462" fill="#9a5a68" font-size="14" letter-spacing="2" opacity=".9">
+      2 0 2 6
+    </text>
+
+    <!-- author lines -->
+    <text x="300" y="550" fill="#d4a359" font-size="13" letter-spacing="2" opacity=".95" filter="url(#glowThin)">
+      ZADDY
+    </text>
+    <text x="300" y="575" fill="#8b31b8" font-size="11" letter-spacing="3" opacity=".85" filter="url(#glowThin)">
+      +++ multiverselib-collectives +++
+    </text>
+
+    <!-- footer status -->
+    <text x="300" y="720" fill="#9a5a68" font-size="10" letter-spacing="2" opacity=".8">
+      LOCAL · SCAFFOLD · PAGE-0
+    </text>
+  </g>
+</svg>

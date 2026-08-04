@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{background:#0a0406;color:#00f3ff;font-family:monospace;padding:20px}
+.yt-embed{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:12px 0;border:1px solid #ff2ad4;background:#000}
+.yt-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.play-btn{background:#ff2ad4;color:#0a0406;border:none;padding:6px 12px;cursor:pointer;font-family:monospace;font-weight:bold}
+.play-btn:hover{background:#fff}
+</style>
+</head>
+<body>
+<h1>YT inline test</h1>
+<button class="play-btn" onclick="playYoutube('2lXNadqQBgE')">▶ play spellbook-taw</button>
+<button class="play-btn" onclick="playYoutube('oNfq3ljiC2g')">▶ play spellbook-jailbreak</button>
+<div id="content"></div>
+<script>
+const content = document.getElementById('content');
+function playYoutube(vid){
+  const div = document.createElement('div');
+  div.className = 'yt-embed';
+  div.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  content.appendChild(div);
+}
+</script>
+</body>
+</html>
