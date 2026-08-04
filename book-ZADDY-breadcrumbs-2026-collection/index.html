@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>ZADDY Breadcrumbs 2026</title>
@@ -28,6 +28,9 @@
   .vibe-zaddy { --bg: #1a0f05; --panel: #2a1a0a; --text: #ffb347; --red: #ff4d1a; --cyan: #ff8c00; }
   .vibe-dab { --bg: #020d08; --panel: #071c10; --text: #9df5b7; --red: #ff3c78; --cyan: #39ff91; }
   .vibe-gdk { --bg: #050a14; --panel: #0a1428; --text: #a0c4ff; --red: #ff2b6a; --cyan: #4a90d9; }
+
+  #audio-player { position: fixed; bottom: 10px; right: 10px; background: var(--panel); border: 1px solid var(--red); padding: 10px; display: none; }
+  .play-btn { background: var(--red); color: var(--bg); border: none; padding: 4px 8px; cursor: pointer; font-family: monospace; }
 </style>
 </head>
 <body>
@@ -46,6 +49,12 @@
 <nav id="toc"></nav>
 <main id="content"></main>
 
+<div id="audio-player">
+  <div style="color:var(--red);margin-bottom:5px">now playing</div>
+  <audio id="audio" controls style="width:300px"></audio>
+  <button class="play-btn" onclick="document.getElementById('audio').pause(); document.getElementById('audio-player').style.display='none';">stop</button>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
 function setTheme(t) { document.body.className = t; localStorage.setItem('theme', t); }
@@ -54,14 +63,6 @@ document.body.className = localStorage.getItem('theme') || '';
 const pages = [
   {title:"cover", file:"page-0-coverimage.md"},
   {title:"vibe-check", file:"page-1-20250909-vibe-check.md"},
-  {title:"professor-x-mode", file:"page-2-20251001-professor-x-mode.md"},
-  {title:"exploit-gcm-tag-truncation", file:"page-3-20251206-exploit-gcm-tag-truncation.md"},
-  {title:"batman-jailbreaks", file:"page-4-20260107-batman-jailbreaks.md"},
-  {title:"echo-deep-seek-source", file:"page-5-20260118-echo-deep-seek-source.md"},
-  {title:"omelette-symptom", file:"page-6-20260126-omelette-symptom.md"},
-  {title:"break-jwt-secrets", file:"page-7-20260129-break-jwt-secrets.md"},
-  {title:"goodboy-recon", file:"page-8-20260201-goodboy-recon.md"},
-  {title:"jwt-betray", file:"page-9-20260205-jwt-betray.md"},
   {title:"necro-hum", file:"page-10-20260207-necro-hum.md"},
   {title:"xss-svg", file:"page-11-20260214-xss-svg.md"},
   {title:"judgement-day", file:"page-12-20260214-judgement-day.md"},
@@ -72,12 +73,21 @@ const pages = [
   {title:"bpj-toy", file:"page-17-20260301-bpj-toy.md"},
   {title:"seven-level-no-panic", file:"page-18-20260303-seven-level-no-panic.md"},
   {title:"letme-speak", file:"page-19-20260305-letme-speak.md"},
+  {title:"professor-x-mode", file:"page-2-20251001-professor-x-mode.md"},
   {title:"lookback-2025", file:"page-20-20260429-lookback-2025.md"},
   {title:"jpf", file:"page-21-20260507-jpf.md"},
   {title:"seven-runes", file:"page-22-20260611-seven-runes.md"},
   {title:"spellbook-taw", file:"page-23-20260624-spellbook-taw.md"},
-  {title:"spellbook-jailbreak", file:"page-24-20260729-spellbook-jailbreak.md"}
+  {title:"spellbook-jailbreak", file:"page-24-20260729-spellbook-jailbreak.md"},
+  {title:"exploit-gcm-tag-truncation", file:"page-3-20251206-exploit-gcm-tag-truncation.md"},
+  {title:"batman-jailbreaks", file:"page-4-20260107-batman-jailbreaks.md"},
+  {title:"echo-deep-seek-source", file:"page-5-20260118-echo-deep-seek-source.md"},
+  {title:"omelette-symptom", file:"page-6-20260126-omelette-symptom.md"},
+  {title:"break-jwt-secrets", file:"page-7-20260129-break-jwt-secrets.md"},
+  {title:"goodboy-recon", file:"page-8-20260201-goodboy-recon.md"},
+  {title:"jwt-betray", file:"page-9-20260205-jwt-betray.md"}
 ];
+
 const toc = document.getElementById('toc');
 pages.forEach((p,i)=>{
   const a = document.createElement('a');
@@ -86,9 +96,30 @@ pages.forEach((p,i)=>{
   a.onclick = (e) => { e.preventDefault(); loadPage(i); };
   toc.appendChild(a);
 });
+
+const audioPlayer = document.getElementById('audio-player');
+const audio = document.getElementById('audio');
+
+function playStory(src){
+  audio.src = src;
+  audioPlayer.style.display = 'block';
+  audio.play();
+}
+
 function loadPage(i){
   fetch(pages[i].file).then(r=>r.text()).then(text=>{
-    document.getElementById('content').innerHTML = marked.parse(text);
+    const content = document.getElementById('content');
+    content.innerHTML = marked.parse(text);
+    
+    // Wire "play story" links
+    content.querySelectorAll('a').forEach(a => {
+        if (a.textContent.toLowerCase().includes('play story')) {
+            a.onclick = (e) => {
+                e.preventDefault();
+                playStory(a.href);
+            }
+        }
+    });
   });
 }
 loadPage(0);

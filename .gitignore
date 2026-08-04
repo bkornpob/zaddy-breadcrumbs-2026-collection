@@ -11,3 +11,4 @@ dist/
 *.log
 node_modules/
 index.html:Zone.Identifier
+*.Identifier
